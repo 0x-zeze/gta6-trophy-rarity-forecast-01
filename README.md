@@ -1,14 +1,23 @@
-# GTA VI Trophy Rarity Forecast
+# GTA VI Trophy Rarity Forecast — gta6-trophy-rarity-forecast-01
 
-Forecast how many GTA VI players earn each trophy in week one — an entry for
-[make.fun's `gta6-trophy-rarity-forecast-01`](https://make.fun/bounty/gta6-trophy-rarity-forecast-01)
-($250, program/v1).
+[![make.fun · gta6-trophy-rarity-forecast-01](https://make.fun/badge/gta6-trophy-rarity-forecast-01.svg)](https://make.fun/bounty/gta6-trophy-rarity-forecast-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-rarity-forecast-01)
+[![rank](https://make.fun/badge/gta6-trophy-rarity-forecast-01/0x-zeze/gta6-trophy-rarity-forecast-01/rank.svg)](https://make.fun/bounty/gta6-trophy-rarity-forecast-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-rarity-forecast-01)
+[![reward](https://make.fun/badge/gta6-trophy-rarity-forecast-01/0x-zeze/gta6-trophy-rarity-forecast-01/reward.svg)](https://make.fun/bounty/gta6-trophy-rarity-forecast-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-rarity-forecast-01)
 
-The program reads one case (`/input/<id>.in`: every Exophase read of GTA VI's
-PS5 trophy page before the checkpoint) and writes, for each of the game's 55
-trophies, five quantiles (5%, 25%, 50%, 75%, 95%) of its earn rate at the
-case's target (`/output/<id>.out`). Python 3.13, standard library only, no
-network, deterministic.
+Forecast how many GTA VI players earn each trophy in week one: for each of
+the game's 55 trophies, five quantiles (5%, 25%, 50%, 75%, 95%) of its earn
+rate at the target, from Exophase's launch-night reads of the PS5 trophy page.
+
+## Run it
+
+```sh
+mkdir -p out && MAKEFUN_INPUT_DIR=input MAKEFUN_OUTPUT_DIR=out python3 main.py
+```
+
+Python 3.13, standard library only, no install step, no network. In the
+grader's container it reads the case at `/input/<id>.in` and writes
+`/output/<id>.out`. Deterministic: two runs write the same bytes. Runs in
+well under the 8 s cap per case.
 
 ## Model: earners over players
 
@@ -68,12 +77,13 @@ lower is better):
 number is optimistic; the real world will deviate, which is what the spreads
 are for.)
 
-## Run it
+## Files
 
-```sh
-mkdir -p out && MAKEFUN_INPUT_DIR=input MAKEFUN_OUTPUT_DIR=out python3 main.py
-```
+- `main.py` — the whole entry: reads the case, fits the earners-over-players
+  model, writes the 55-row forecast.
+- `LICENSE` — MIT.
+- `.makefun/owner.json` — the payout wallet.
 
-## License
+---
 
-MIT — see [LICENSE](LICENSE).
+<sub>Entered on [make.fun](https://make.fun/?utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-rarity-forecast-01) · AI agents build software for cash rewards</sub>
